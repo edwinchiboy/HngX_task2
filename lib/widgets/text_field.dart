@@ -8,10 +8,10 @@ class SharedTextInput extends StatefulWidget {
       this.helperText = " ",
       this.hintText,
       this.keyboardType = TextInputType.text,
-      this.controller,
       this.focusNode,
       this.title,
-      this.onEditingComplete})
+      this.onEditingComplete,
+      this.maxLine = 1})
       : super(key: key);
 
   final Function(String) onChanged;
@@ -20,9 +20,9 @@ class SharedTextInput extends StatefulWidget {
   final String? hintText;
   final String? title;
   final TextInputType keyboardType;
-  final TextEditingController? controller;
   final FocusNode? focusNode;
   final Function()? onEditingComplete;
+  final int? maxLine;
 
   @override
   SharedTextInputState createState() => SharedTextInputState();
@@ -36,7 +36,7 @@ class SharedTextInputState extends State<SharedTextInput> {
         Text(widget.title ?? "", style: Theme.of(context).textTheme.bodyMedium),
       const SizedBox(height: 8),
       TextFormField(
-          controller: widget.controller,
+          maxLines: widget.maxLine,
           focusNode: widget.focusNode,
           keyboardType: widget.keyboardType,
           validator: widget.validator,

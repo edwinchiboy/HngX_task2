@@ -97,6 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SharedTextInput(
                         title: "Personal Bio",
                         hintText: "Personal bio",
+                        maxLine: 8,
                         focusNode: personalBioNameFieldNode,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
