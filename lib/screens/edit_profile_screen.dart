@@ -4,7 +4,17 @@ import 'package:hng_stage2_task/models/CvModel.dart';
 import 'package:hng_stage2_task/widgets/text_field.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  final String name;
+  final String slackName;
+  final String gitHubUrl;
+  final String personalBio;
+
+  const EditProfileScreen(
+      {required this.personalBio,
+      required this.slackName,
+      required this.name,
+      required this.gitHubUrl,
+      super.key});
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -17,6 +27,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   FocusNode gitNameFieldNode = FocusNode();
   FocusNode personalBioNameFieldNode = FocusNode();
   CvModel userCv = CvModel();
+  final TextEditingController nameFieldController = TextEditingController();
+  final TextEditingController slackFieldController = TextEditingController();
+  final TextEditingController githubFieldController = TextEditingController();
+  final TextEditingController personalBioFieldController =
+      TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    nameFieldController.text = widget.name;
+    slackFieldController.text = widget.slackName;
+    githubFieldController.text = widget.gitHubUrl;
+    personalBioFieldController.text = widget.personalBio;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +63,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     SharedTextInput(
                         title: "Name",
-                        hintText: "Chiboy Edeh",
+                        hintText: "Name",
+                        controller: nameFieldController,
                         focusNode: nameFieldNode,
                         onEditingComplete: () =>
                             slackNameFieldNode.requestFocus(),
@@ -59,6 +84,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SharedTextInput(
                         title: "Slack Name ",
                         hintText: "Flutter_Chiboy",
+                        controller: slackFieldController,
                         focusNode: slackNameFieldNode,
                         onEditingComplete: () =>
                             gitNameFieldNode.requestFocus(),
@@ -78,6 +104,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     SharedTextInput(
                         title: "GitHub URL ",
                         hintText: "Github.com/chiboy",
+                        controller: githubFieldController,
                         focusNode: gitNameFieldNode,
                         onEditingComplete: () =>
                             personalBioNameFieldNode.requestFocus(),
@@ -98,6 +125,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         title: "Personal Bio",
                         hintText: "Personal bio",
                         maxLine: 8,
+                        controller: personalBioFieldController,
                         focusNode: personalBioNameFieldNode,
                         validator: (value) {
                           if (value == null || value.isEmpty) {

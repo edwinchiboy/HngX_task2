@@ -60,8 +60,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const EditProfileScreen())).then((value) {
+                              builder: (context) => EditProfileScreen(
+                                    personalBio: personalBio,
+                                    slackName: slackUserName,
+                                    name: fullName,
+                                    gitHubUrl: gitHubUrl,
+                                  ))).then((value) {
                         if (value != null) {
                           final data = value;
                           setState(() {

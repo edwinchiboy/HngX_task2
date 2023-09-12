@@ -11,7 +11,9 @@ class SharedTextInput extends StatefulWidget {
       this.focusNode,
       this.title,
       this.onEditingComplete,
-      this.maxLine = 1})
+      this.maxLine = 1,
+        required this.controller,
+      })
       : super(key: key);
 
   final Function(String) onChanged;
@@ -23,6 +25,8 @@ class SharedTextInput extends StatefulWidget {
   final FocusNode? focusNode;
   final Function()? onEditingComplete;
   final int? maxLine;
+  final TextEditingController? controller;
+
 
   @override
   SharedTextInputState createState() => SharedTextInputState();
@@ -40,6 +44,7 @@ class SharedTextInputState extends State<SharedTextInput> {
           focusNode: widget.focusNode,
           keyboardType: widget.keyboardType,
           validator: widget.validator,
+          controller: widget.controller,
           onChanged: widget.onChanged,
           decoration: InputDecoration(
               fillColor: Theme.of(context).cardColor,
